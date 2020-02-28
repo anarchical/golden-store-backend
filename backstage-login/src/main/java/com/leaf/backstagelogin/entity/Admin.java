@@ -2,10 +2,7 @@ package com.leaf.backstagelogin.entity;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 /**
  * @author YeYaqiao
@@ -22,6 +19,7 @@ public class Admin {
 
     private String name;
 
+    @Column(unique = true)
     private String username;
 
     private String password;
