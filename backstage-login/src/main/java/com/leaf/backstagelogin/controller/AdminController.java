@@ -22,12 +22,12 @@ public class AdminController {
     @Autowired
     AdminService adminService;
 
-    @GetMapping("/alladmin")
+    @GetMapping("/allAdmin")
     public List<Admin> getAllAdmin() {
         return adminService.getAllAdmin();
     }
 
-    @PostMapping("/addadmin")
+    @PostMapping("/addAdmin")
     public Admin addAdmin(@RequestBody Admin admin) {
         return adminService.addAdmin(admin);
     }

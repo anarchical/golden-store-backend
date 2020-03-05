@@ -18,6 +18,7 @@
 
     <modules>
         <module>backstage-login</module>
+        <module>backstage-menu</module>
     </modules>
 
     <properties>
