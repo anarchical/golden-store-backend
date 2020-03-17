@@ -19,6 +19,8 @@
     <modules>
         <module>backstage-login</module>
         <module>backstage-menu</module>
+        <module>wx-login</module>
+        <module>wx-order</module>
     </modules>
 
     <properties>
