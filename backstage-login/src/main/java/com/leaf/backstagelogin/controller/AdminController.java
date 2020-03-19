@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YeYaqiao
@@ -33,13 +34,13 @@ public class AdminController {
     }
 
     @PostMapping("/login")
-    public boolean loginAdmin(@RequestBody JSONObject loginInfo) {
-        String username=loginInfo.getString("username");
-        String password=loginInfo.getString("password");
+    public Map<Object, Object> loginAdmin(@RequestBody JSONObject loginInfo) {
+        String username = loginInfo.getString("username");
+        String password = loginInfo.getString("password");
         log.info("用户名：{} \n 密码：{}", loginInfo.getString("username"),
                 loginInfo.getString("password"));
 
-        return adminService.loginAdmin(username,password);
+        return adminService.loginAdmin(username, password);
     }
 
 

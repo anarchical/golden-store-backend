@@ -23,3 +23,8 @@ logging:
     com.leaf: info
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %C.%M[%line] - %msg%n'
+
+# token秘钥，失效时间6小时
+jwt:
+  key: goldenleaf
+  expTime: 21600000

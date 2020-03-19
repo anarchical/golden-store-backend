@@ -2,11 +2,14 @@ package com.leaf.backstagelogin.service;
 
 import com.leaf.backstagelogin.entity.Admin;
 import com.leaf.backstagelogin.repository.AdminRepository;
+import com.leaf.backstagelogin.utils.JwtUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author YeYaqiao
@@ -16,6 +19,9 @@ import java.util.List;
 @Service
 @Slf4j
 public class AdminService {
+
+    @Autowired
+    JwtUtil jwtUtil;
 
     @Autowired
     AdminRepository adminRepository;
@@ -28,13 +34,19 @@ public class AdminService {
         return adminRepository.save(admin);
     }
 
-    public boolean loginAdmin(String username, String password) {
+    public Map<Object, Object> loginAdmin(String username, String password) {
 
         Admin admin = adminRepository.findAdminByUsername(username);
-        if (admin == null) {
-            return false;
+        if (admin == null || !admin.getPassword().equals(password)) {
+            Map<Object, Object> map = new HashMap<>();
+            map.put("token", null);
+            map.put("success", false);
+            return map;
         }
         log.info(admin.toString());
-        return admin.getPassword().equals(password);
+        Map<Object, Object> map = new HashMap<>();
+        map.put("token", jwtUtil.createJwt(username, password));
+        map.put("success", true);
+        return map;
     }
 }
