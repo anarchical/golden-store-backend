@@ -11,4 +11,5 @@ public class User {
     private String nickName;
     private String address;
     private String telephone;
+    private boolean status;
 }
