@@ -6,7 +6,6 @@
         <groupId>com.leaf</groupId>
         <artifactId>golden-store-backend</artifactId>
         <version>0.0.1-SNAPSHOT</version>
-        <relativePath/>
     </parent>
 
     <artifactId>backstage-user</artifactId>
@@ -14,4 +13,12 @@
     <name>backstage-user</name>
     <description>Demo project for Spring Boot</description>
 
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+        </plugins>
+    </build>
 </project>

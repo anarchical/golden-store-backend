@@ -14,12 +14,13 @@
     <version>0.0.1-SNAPSHOT</version>
     <name>golden-store-backend</name>
     <description>Demo project for Spring Boot</description>
-    <packaging>jar</packaging>
+    <packaging>pom</packaging>
 
     <modules>
         <module>backstage-login</module>
         <module>backstage-menu</module>
         <module>backstage-user</module>
+        <module>backstage-good</module>
         <module>wx-login</module>
         <module>wx-order</module>
     </modules>
