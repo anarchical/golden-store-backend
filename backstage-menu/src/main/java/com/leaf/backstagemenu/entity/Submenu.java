@@ -5,6 +5,9 @@ import lombok.Data;
 
 import javax.persistence.*;
 
+/**
+ * @author Leaf
+ */
 @Entity
 @Data
 public class Submenu {

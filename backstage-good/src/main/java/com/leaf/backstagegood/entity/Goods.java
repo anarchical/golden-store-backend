@@ -1,11 +1,11 @@
 package com.leaf.backstagegood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * @author YeYaqiao
@@ -14,8 +14,8 @@ import java.util.List;
  */
 @Entity
 @Data
-@NoArgsConstructor
 @AllArgsConstructor
+@NoArgsConstructor
 public class Goods {
 
     @Id
@@ -44,6 +44,11 @@ public class Goods {
 
     //    详细信息
     private String detail;
+
+    //    商品类别
+    @ManyToOne
+    @JsonIgnore
+    private Type type;
 
     private String[] imageUrls;
 
