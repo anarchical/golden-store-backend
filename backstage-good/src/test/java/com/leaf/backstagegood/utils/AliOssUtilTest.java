@@ -12,12 +12,4 @@ import org.springframework.boot.test.context.SpringBootTest;
 @SpringBootTest
 class AliOssUtilTest {
 
-    @Autowired
-    AliOssUtil aliOssUtil;
-
-    @Test
-    public void testOSS(){
-        aliOssUtil.getOssClient();
-    }
-
 }

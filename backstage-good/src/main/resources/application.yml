@@ -30,3 +30,4 @@ aliyun-oss:
   accessKeyId: LTAI4FeDxmH2c3hnbdwEb9QC
   accessKeySecret: dCvVuIkbAlqaIUjOtnL6dPLrijQfUR
   bucketName: tachikoma
+  ossUrl: https://tachikoma.oss-cn-chengdu.aliyuncs.com/

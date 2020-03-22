@@ -2,12 +2,15 @@ package com.leaf.backstagegood.utils;
 
 import com.aliyun.oss.OSS;
 import com.aliyun.oss.OSSClientBuilder;
-import com.aliyun.oss.model.BucketInfo;
 import com.leaf.backstagegood.properties.AliYunOssProperties;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
+import org.springframework.web.multipart.MultipartFile;
+
+import java.io.File;
+import java.io.IOException;
+import java.io.InputStream;
 
 /**
  * @author YeYaqiao
@@ -21,17 +24,19 @@ public class AliOssUtil {
     @Autowired
     AliYunOssProperties aliYunOssProperties;
 
-    public OSS getOssClient() {
+    public String getImageUrl(MultipartFile file) {
         OSS ossClient = new OSSClientBuilder().build(
                 aliYunOssProperties.getEndpoint(),
                 aliYunOssProperties.getAccessKeyId(),
                 aliYunOssProperties.getAccessKeySecret());
-        BucketInfo info = ossClient.getBucketInfo(aliYunOssProperties.getBucketName());
-        System.out.println("Bucket " + aliYunOssProperties.getBucketName() + "的信息如下：");
-        System.out.println("\t数据中心：" + info.getBucket().getLocation());
-        System.out.println("\t创建时间：" + info.getBucket().getCreationDate());
-        System.out.println("\t用户标志：" + info.getBucket().getOwner());
-        return ossClient;
+        String fileName = file.getOriginalFilename();
+        try {
+            ossClient.putObject(aliYunOssProperties.getBucketName(), fileName, file.getInputStream());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        assert fileName != null;
+        return aliYunOssProperties.getOssUrl().concat(fileName);
     }
 
 
