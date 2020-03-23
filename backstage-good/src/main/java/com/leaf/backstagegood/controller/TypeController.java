@@ -6,6 +6,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -26,28 +27,43 @@ public class TypeController {
 
     @ApiOperation(value = "获取所有类型信息")
     @GetMapping("allType")
-    public List<Type> getAllType(){
-        return typeService.getAllType();
+    public Page<Type> getAllType(@RequestParam("size") int size,
+                                 @RequestParam("page") int page,
+                                 @RequestParam(required = false) String query) {
+        if (query.isEmpty()) {
+            return typeService.getAllType(page - 1, size);
+        }
+        return typeService.queryType(query, page - 1, size);
     }
-    @ApiOperation(value = "查询类型信息")
+
+    @ApiOperation(value = "通过id查询类型信息")
     @GetMapping("/queryType")
-    public Type getTypeById(@RequestParam("id") int id){
+    public Type getTypeById(@RequestParam("id") int id) {
         return typeService.getTypeById(id);
     }
+
     @ApiOperation(value = "更新类型信息")
     @PostMapping("/updateType")
-    public Type updateType(@RequestBody Type type){
+    public Type updateType(@RequestBody Type type) {
         return typeService.updateType(type);
     }
+
     @ApiOperation(value = "添加类型信息")
     @PostMapping("/addType")
-    public Type addType(@RequestBody Type type){
+    public Type addType(@RequestBody Type type) {
         return typeService.addType(type);
     }
+
     @ApiOperation(value = "删除类型信息")
     @GetMapping("/deleteType")
-    public void deleteType(@RequestParam("id") int id){
-        typeService.deleteTypeById(id);
+    public boolean deleteType(@RequestParam("id") int id) {
+        try {
+            typeService.deleteTypeById(id);
+            return true;
+        } catch (Exception e) {
+            log.error(String.valueOf(e));
+        }
+        return false;
     }
 
 

@@ -3,9 +3,9 @@ package com.leaf.backstagegood.service;
 import com.leaf.backstagegood.entity.Type;
 import com.leaf.backstagegood.repository.TypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * @author YeYaqiao
@@ -18,8 +18,9 @@ public class TypeService {
     @Autowired
     TypeRepository typeRepository;
 
-    public List<Type> getAllType() {
-        return typeRepository.findAll();
+    public Page<Type> getAllType(int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return typeRepository.findAllType(pageRequest);
     }
 
     public void deleteTypeById(int id) {
@@ -36,5 +37,16 @@ public class TypeService {
 
     public Type getTypeById(int id) {
         return typeRepository.findById(id);
+    }
+
+    /**
+     * 类型模糊查询 加%
+     *
+     * @param query 查询内容
+     * @return 返回查询结果
+     */
+    public Page<Type> queryType(String query, int page, int size) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        return typeRepository.findTypesByQuery("%" + query + "%", pageRequest);
     }
 }
