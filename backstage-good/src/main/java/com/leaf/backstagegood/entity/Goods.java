@@ -6,6 +6,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.List;
 
 /**
  * @author YeYaqiao
@@ -28,28 +29,32 @@ public class Goods {
     private int stock;
 
     //    成本价
-    private float costPrice;
+    private double costPrice;
     //    批发价
-    private float tradePrice;
+    private double tradePrice;
     //    建议零售价
-    private float price;
+    private double price;
     //    平台利润
-    private float myReturn = tradePrice - costPrice;
+    private double myReturn;
     //    每个批发单位数量
     private int numSpec;
     //    客户利润
-    private float profit = numSpec * price - tradePrice;
+    private double profit;
     //    规格
     private String specification;
 
     //    详细信息
     private String detail;
 
+    //    是否上架
+    private boolean isSell;
     //    商品类别
     @ManyToOne
-    @JsonIgnore
     private Type type;
 
-    private String[] imageUrls;
+    //    设置级联删除
+    @JsonIgnore
+    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE)
+    private List<Images> imageUrls;
 
 }
