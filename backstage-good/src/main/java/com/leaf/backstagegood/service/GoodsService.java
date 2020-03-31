@@ -47,6 +47,9 @@ public class GoodsService {
     }
 
     public Goods updateGoods(Goods goods) {
+        //计算利润
+        goods.setMyReturn(goods.getTradePrice() - goods.getCostPrice());
+        goods.setProfit(goods.getPrice() - goods.getTradePrice());
         return goodsRepository.save(goods);
     }
 

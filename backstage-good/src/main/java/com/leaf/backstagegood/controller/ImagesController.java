@@ -38,4 +38,9 @@ public class ImagesController {
     public List<Images> getImagesByGoodsId(@RequestParam("id") int id) {
         return imagesService.getImagesByGoodsId(id);
     }
+
+    @GetMapping("/deleteImagesByGoodsId")
+    public int deleteImagesByGoodsId(@RequestParam("id") int id) {
+        return imagesService.deleteImagesByGoodsId(id);
+    }
 }

@@ -3,6 +3,7 @@ package com.leaf.backstagegood.repository;
 import com.leaf.backstagegood.entity.Images;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -12,7 +13,10 @@ import java.util.List;
  * @time 2020/3/27 7:14 下午
  */
 @Repository
+@Transactional
 public interface ImagesRepository extends JpaRepository<Images, Integer> {
 
     List<Images> findByGoodsId(int id);
+
+    int deleteByGoodsId(int id);
 }

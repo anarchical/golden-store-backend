@@ -29,4 +29,8 @@ public class ImagesService {
     public List<Images> getImagesByGoodsId(int id) {
         return imagesRepository.findByGoodsId(id);
     }
+
+    public int deleteImagesByGoodsId(int id) {
+        return imagesRepository.deleteByGoodsId(id);
+    }
 }
