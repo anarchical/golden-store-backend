@@ -21,6 +21,7 @@
         <module>backstage-menu</module>
         <module>backstage-user</module>
         <module>backstage-good</module>
+        <module>backstage-order</module>
         <module>wx-login</module>
         <module>wx-order</module>
     </modules>

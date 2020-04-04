@@ -2,7 +2,6 @@ package com.leaf.backstagegood.controller;
 
 import com.leaf.backstagegood.entity.Goods;
 import com.leaf.backstagegood.service.GoodsService;
-import com.leaf.backstagegood.utils.AliOssUtil;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
@@ -21,8 +20,8 @@ import java.util.List;
 @RequestMapping("/goods")
 @Api(value = "商品信息接口")
 public class GoodsController {
-    @Autowired
-    AliOssUtil aliOssUtil;
+//    @Autowired
+//    AliOssUtil aliOssUtil;
     @Autowired
     GoodsService goodsService;
 

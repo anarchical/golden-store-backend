@@ -1,5 +1,5 @@
 server:
-  port: 8084
+  port: 8085
 
 spring:
   jpa:
@@ -23,11 +23,3 @@ logging:
     com.leaf: info
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %C.%M[%line] - %msg%n'
-
-#阿里云对象存储配置
-#aliyun-oss:
-#  endpoint: https://oss-cn-chengdu.aliyuncs.com
-#  accessKeyId: LTAI4FeDxmH2c3hnbdwEb9QC
-#  accessKeySecret: dCvVuIkbAlqaIUjOtnL6dPLrijQfUR
-#  bucketName: tachikoma
-#  ossUrl: https://tachikoma.oss-cn-chengdu.aliyuncs.com/
