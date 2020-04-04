@@ -11,13 +11,13 @@ import java.util.List;
 /**
  * @author YeYaqiao
  * @email yyq920201895@163.com
- * @time 2020/3/22 4:51 下午
+ * @time 2020/4/4 9:33 下午
  */
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
-public class Type {
+@AllArgsConstructor
+public class SubType {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -25,7 +25,12 @@ public class Type {
 
     private String name;
 
+    private String imageUrl;
+
+    @ManyToOne
+    private Type type;
+
     @JsonIgnore
-    @OneToMany(mappedBy = "type")
-    private List<SubType> subType;
+    @OneToMany(mappedBy = "subType")
+    private List<Goods> goods;
 }

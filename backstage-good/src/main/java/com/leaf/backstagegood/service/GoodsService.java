@@ -58,7 +58,7 @@ public class GoodsService {
     }
 
     public List<Goods> getGoodsByTypeId(int id) {
-        return goodsRepository.findGoodsByTypeId(id);
+        return goodsRepository.findGoodsBySubTypeId(id);
     }
 
     public int updateGoodsSell(int id, boolean isSell) {

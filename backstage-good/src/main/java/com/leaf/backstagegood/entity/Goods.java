@@ -50,7 +50,7 @@ public class Goods {
     private boolean isSell;
     //    商品类别
     @ManyToOne
-    private Type type;
+    private SubType subType;
 
     //    设置级联删除
     @JsonIgnore

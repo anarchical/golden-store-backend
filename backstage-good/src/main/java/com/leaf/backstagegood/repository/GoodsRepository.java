@@ -27,7 +27,7 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer> {
     @Query("select goods from Goods goods where goods.name like :query")
     Page<Goods> findGoodsByQuery(@Param("query") String query, Pageable pageable);
 
-    List<Goods> findGoodsByTypeId(int id);
+    List<Goods> findGoodsBySubTypeId(int id);
 
     @Modifying
     @Query("update Goods goods set goods.isSell=:isSell where goods.id=:id")
