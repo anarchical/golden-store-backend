@@ -19,4 +19,6 @@ public interface ImagesRepository extends JpaRepository<Images, Integer> {
     List<Images> findByGoodsId(int id);
 
     int deleteByGoodsId(int id);
+
+    void deleteById(int id);
 }

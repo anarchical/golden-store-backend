@@ -43,4 +43,15 @@ public class ImagesController {
     public int deleteImagesByGoodsId(@RequestParam("id") int id) {
         return imagesService.deleteImagesByGoodsId(id);
     }
+
+    @GetMapping("/deleteImageById")
+    public boolean deleteImageById(@RequestParam("id") int id) {
+        try {
+            imagesService.deleteImageById(id);
+            return true;
+        } catch (Exception e) {
+            log.error(String.valueOf(e));
+        }
+        return false;
+    }
 }

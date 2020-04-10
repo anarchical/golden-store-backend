@@ -33,4 +33,8 @@ public class ImagesService {
     public int deleteImagesByGoodsId(int id) {
         return imagesRepository.deleteByGoodsId(id);
     }
+
+    public void deleteImageById(int id) {
+        imagesRepository.deleteById(id);
+    }
 }

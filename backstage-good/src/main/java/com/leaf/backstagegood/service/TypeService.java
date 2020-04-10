@@ -6,6 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author YeYaqiao
  * @email yaqiao.ye@mobilityasia.com.cn
@@ -46,5 +48,6 @@ public class TypeService {
     public Type getTypeById(int id) {
         return typeRepository.findById(id);
     }
+
 
 }

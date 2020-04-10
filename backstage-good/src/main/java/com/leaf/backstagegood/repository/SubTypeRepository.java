@@ -4,8 +4,10 @@ import com.leaf.backstagegood.entity.SubType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
@@ -14,6 +16,7 @@ import java.util.List;
  * @email yyq920201895@163.com
  * @time 2020/4/4 9:59 下午
  */
+@Repository
 public interface SubTypeRepository extends JpaRepository<SubType, Integer> {
 
 
@@ -27,4 +30,8 @@ public interface SubTypeRepository extends JpaRepository<SubType, Integer> {
 
 
     List<SubType> findSubTypeByTypeId(int id);
+
+    @Modifying
+    @Query("update SubType subtype set subtype.imageUrl=:imageUrl where subtype.id=:id")
+    int updateImageUrl(@Param("id") int id, @Param("imageUrl") String imageUrl);
 }

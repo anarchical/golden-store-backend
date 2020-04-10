@@ -1,6 +1,7 @@
 package com.leaf.backstagegood.entity;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +18,8 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//避免双向关联造成无限引用
+@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Type {
 
     @Id
@@ -25,7 +28,6 @@ public class Type {
 
     private String name;
 
-    @JsonIgnore
     @OneToMany(mappedBy = "type")
     private List<SubType> subType;
 }

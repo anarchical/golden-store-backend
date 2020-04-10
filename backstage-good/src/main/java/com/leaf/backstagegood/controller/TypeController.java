@@ -1,18 +1,14 @@
 package com.leaf.backstagegood.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.leaf.backstagegood.entity.Type;
 import com.leaf.backstagegood.service.TypeService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * @author YeYaqiao
@@ -35,9 +31,9 @@ public class TypeController {
                              @RequestParam(required = false) String query) {
         if (page != null && size != null) {
             if (query == null) {
-                return typeService.getAllType(page-1, size);
+                return typeService.getAllType(page - 1, size);
             }
-            return typeService.getAllType("%" + query + "%", page-1, size);
+            return typeService.getAllType("%" + query + "%", page - 1, size);
         }
         return typeService.getAllType();
     }
@@ -71,6 +67,5 @@ public class TypeController {
         }
         return false;
     }
-
 
 }

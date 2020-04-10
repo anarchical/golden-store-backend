@@ -29,17 +29,17 @@ public class Goods {
     private int stock;
 
     //    成本价
-    private double costPrice;
+    private float costPrice;
     //    批发价
-    private double tradePrice;
+    private float tradePrice;
     //    建议零售价
-    private double price;
+    private float price;
     //    平台利润
-    private double myReturn;
+    private float myReturn;
     //    每个批发单位数量
     private int numSpec;
     //    客户利润
-    private double profit;
+    private float profit;
     //    规格
     private String specification;
 
@@ -54,7 +54,7 @@ public class Goods {
 
     //    设置级联删除
     @JsonIgnore
-    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE)
+    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Images> imageUrls;
 
 }

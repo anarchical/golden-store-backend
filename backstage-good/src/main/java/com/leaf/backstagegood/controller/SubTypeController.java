@@ -27,13 +27,13 @@ public class SubTypeController {
     @ApiOperation(value = "获取所有类型信息,分页")
     @GetMapping("/allSubType")
     public Object getAllSubType(@RequestParam(required = false) Integer size,
-                             @RequestParam(required = false) Integer page,
-                             @RequestParam(required = false) String query) {
+                                @RequestParam(required = false) Integer page,
+                                @RequestParam(required = false) String query) {
         if (page != null && size != null) {
             if (query == null) {
-                return subTypeService.getAllSubType(page-1, size);
+                return subTypeService.getAllSubType(page - 1, size);
             }
-            return subTypeService.getAllSubType("%" + query + "%", page-1, size);
+            return subTypeService.getAllSubType("%" + query + "%", page - 1, size);
         }
         return subTypeService.getAllSubType();
     }
@@ -50,7 +50,7 @@ public class SubTypeController {
         return subTypeService.addSubType(SubType);
     }
 
-    @ApiOperation(value = "添加类型信息")
+    @ApiOperation(value = "添加子类型信息")
     @PostMapping("/addSubType")
     public SubType addSubType(@RequestBody SubType subType) {
         return subTypeService.addSubType(subType);
@@ -71,6 +71,13 @@ public class SubTypeController {
     @GetMapping("/getSubTypeByTypeId")
     public List<SubType> getSubTypeByTypeId(@RequestParam("id") int id) {
         return subTypeService.getSubTypeByTypeId(id);
+    }
+
+    @GetMapping("/updateImages")
+    public int updateImageUrl(@RequestParam("id") int id,
+                              @RequestParam("imageUrl") String imageUrl) {
+        return subTypeService.updateImageUrl(id, imageUrl);
+
     }
 
 

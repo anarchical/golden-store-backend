@@ -8,6 +8,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
+
 /**
  * @author YeYaqiao
  * @email yaqiao.ye@mobilityasia.com.cn
@@ -23,6 +25,5 @@ public interface TypeRepository extends JpaRepository<Type, Integer> {
 
     @Query("select type from Type type where type.name like :query")
     Page<Type> findTypesByQuery(@Param("query") String query, Pageable pageable);
-
 
 }

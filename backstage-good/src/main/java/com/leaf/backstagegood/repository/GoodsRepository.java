@@ -32,4 +32,5 @@ public interface GoodsRepository extends JpaRepository<Goods, Integer> {
     @Modifying
     @Query("update Goods goods set goods.isSell=:isSell where goods.id=:id")
     int updateGoodsSell(@Param("id") int id, @Param("isSell") boolean isSell);
+
 }

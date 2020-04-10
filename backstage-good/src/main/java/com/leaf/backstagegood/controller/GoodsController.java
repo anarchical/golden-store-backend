@@ -20,7 +20,7 @@ import java.util.List;
 @RequestMapping("/goods")
 @Api(value = "商品信息接口")
 public class GoodsController {
-//    @Autowired
+    //    @Autowired
 //    AliOssUtil aliOssUtil;
     @Autowired
     GoodsService goodsService;

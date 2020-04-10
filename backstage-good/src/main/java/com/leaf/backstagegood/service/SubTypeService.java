@@ -1,11 +1,12 @@
 package com.leaf.backstagegood.service;
 
+import com.alibaba.fastjson.JSONObject;
 import com.leaf.backstagegood.entity.SubType;
-import com.leaf.backstagegood.entity.Type;
 import com.leaf.backstagegood.repository.SubTypeRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
@@ -15,6 +16,7 @@ import java.util.List;
  * @time 2020/4/4 9:59 下午
  */
 @Service
+@Transactional
 public class SubTypeService {
 
     @Autowired
@@ -51,5 +53,10 @@ public class SubTypeService {
     public SubType getSubTypeById(int id) {
         return subTypeRepository.findById(id);
     }
+
+    public int updateImageUrl(int id, String imageUrl) {
+        return subTypeRepository.updateImageUrl(id, imageUrl);
+    }
+
 
 }
