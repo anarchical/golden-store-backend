@@ -34,4 +34,8 @@ public interface SubTypeRepository extends JpaRepository<SubType, Integer> {
     @Modifying
     @Query("update SubType subtype set subtype.imageUrl=:imageUrl where subtype.id=:id")
     int updateImageUrl(@Param("id") int id, @Param("imageUrl") String imageUrl);
+
+    @Modifying
+    @Query("update SubType subType set subType.imageUrl=null where subType.id=:id")
+    int deleteImageUrlById(@Param("id") int id);
 }

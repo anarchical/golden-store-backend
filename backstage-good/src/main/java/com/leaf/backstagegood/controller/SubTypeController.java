@@ -80,5 +80,16 @@ public class SubTypeController {
 
     }
 
+    @GetMapping("/deleteImage")
+    public boolean deleteImageUrl(@RequestParam("id") int id) {
+        try {
+            subTypeService.deleteImageUrl(id);
+            return true;
+        } catch (Exception e) {
+            log.error(String.valueOf(e));
+        }
+        return false;
+    }
+
 
 }

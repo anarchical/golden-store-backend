@@ -58,5 +58,9 @@ public class SubTypeService {
         return subTypeRepository.updateImageUrl(id, imageUrl);
     }
 
+    public int deleteImageUrl(int id) {
+        return subTypeRepository.deleteImageUrlById(id);
+    }
+
 
 }
