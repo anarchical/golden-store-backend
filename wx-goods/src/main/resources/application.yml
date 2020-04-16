@@ -1,0 +1,33 @@
+server:
+  port: 8086
+
+spring:
+  jpa:
+    show-sql: true
+    database: mysql
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL8Dialect
+        format_sql: true
+    hibernate:
+      ddl-auto: update
+  datasource:
+    url: jdbc:mysql://127.0.0.1:3306/goldenstore?createDatabaseIfNotExist=true&allowPublicKeyRetrieval=true&serverTimezone=Asia/Shanghai
+    username: root
+    password: 123456
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+logging:
+  level:
+    root: warn
+    com.leaf: info
+  pattern:
+    console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %C.%M[%line] - %msg%n'
+
+#阿里云对象存储配置
+#aliyun-oss:
+#  endpoint: https://oss-cn-chengdu.aliyuncs.com
+#  accessKeyId: LTAI4FeDxmH2c3hnbdwEb9QC
+#  accessKeySecret: dCvVuIkbAlqaIUjOtnL6dPLrijQfUR
+#  bucketName: tachikoma
+#  ossUrl: https://tachikoma.oss-cn-chengdu.aliyuncs.com/

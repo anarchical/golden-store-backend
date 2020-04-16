@@ -24,6 +24,7 @@
         <module>backstage-order</module>
         <module>wx-login</module>
         <module>wx-order</module>
+        <module>wx-goods</module>
     </modules>
 
     <properties>

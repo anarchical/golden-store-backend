@@ -1,6 +1,8 @@
 package com.leaf.backstagegood.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -17,6 +19,7 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Goods {
 
     @Id
@@ -54,7 +57,7 @@ public class Goods {
 
     //    设置级联删除
     @JsonIgnore
-    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "goods", cascade = CascadeType.REMOVE)
     private List<Images> imageUrls;
 
 }

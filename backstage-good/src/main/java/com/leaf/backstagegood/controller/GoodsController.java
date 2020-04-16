@@ -67,6 +67,7 @@ public class GoodsController {
     @ApiOperation(value = "更新商品信息")
     @PostMapping("/updateGoods")
     public Goods updateGoods(@RequestBody Goods goods) {
+        log.info("商品信息：{}", goods);
         return goodsService.updateGoods(goods);
     }
 
