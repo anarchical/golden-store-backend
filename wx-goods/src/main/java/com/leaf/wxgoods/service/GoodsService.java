@@ -46,7 +46,11 @@ public class GoodsService {
         Goods goods = goodsRepository.findGoodsById(id);
         List<Images> imagesList = imagesRepository.findImageListByGoodsId(id);
         goods.setImagesList(imagesList);
-        goods.setImageUrl(imagesList.get(0).getUrl());
+        if (!imagesList.isEmpty()) {
+            goods.setImageUrl(imagesList.get(0).getUrl());
+        } else {
+            goods.setImageUrl(null);
+        }
         return goods;
     }
 

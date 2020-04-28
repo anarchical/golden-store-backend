@@ -1,5 +1,5 @@
 server:
-  port: 8083
+  port: 8088
 
 spring:
   jpa:
@@ -23,3 +23,9 @@ logging:
     com.leaf: info
   pattern:
     console: '%d{yyyy-MM-dd HH:mm:ss} %-5level %C.%M[%line] - %msg%n'
+
+wx-info:
+  appid: wx8bbd6224d9684284
+  secret: 713e8ca392b247e8d93981c33e74f714
+  grant_type: authorization_code
+  url: https://api.weixin.qq.com/sns/jscode2session

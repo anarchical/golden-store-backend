@@ -26,7 +26,7 @@ public class OrdersGoods {
     @ManyToOne
     private Goods goods;
 
-    private int num;
+    private int quantity;
 
     @JsonIgnore
     @ManyToOne

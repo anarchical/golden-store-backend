@@ -1,5 +1,6 @@
 package com.leaf.backstageorder.entity;
 
+import com.leaf.backstageuser.entity.Address;
 import com.leaf.backstageuser.entity.User;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -24,10 +25,13 @@ public class Orders {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
-    private String ordersId;
+    private float price;
 
     @ManyToOne
     private User user;
+
+    @ManyToOne
+    private Address address;
 
     @Column(columnDefinition = "TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP",
             insertable = false,
