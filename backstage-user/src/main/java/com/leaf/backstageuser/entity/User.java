@@ -32,6 +32,6 @@ public class User {
     private String country;
     private String avatarUrl;
 
-    @OneToMany(mappedBy = "user")
+    @OneToMany(mappedBy = "user" ,cascade = CascadeType.REMOVE)
     private List<Address> addressList;
 }
