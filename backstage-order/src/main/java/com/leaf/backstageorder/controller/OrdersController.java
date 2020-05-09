@@ -1,16 +1,14 @@
 package com.leaf.backstageorder.controller;
 
-import com.leaf.backstageorder.entity.Orders;
+import com.alibaba.fastjson.JSONObject;
 import com.leaf.backstageorder.service.OrdersService;
+import com.leaf.backstageorder.vo.OrdersVO;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
-import java.util.List;
+import org.springframework.data.domain.Page;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author YeYaqiao
@@ -40,9 +38,38 @@ public class OrdersController {
 //        return goodsService.getAllGoods();
 //    }
 
+
     @ApiOperation("获取所有订单信息")
     @GetMapping("/allOrders")
-    public List<Orders> getAllOrders() {
-        return ordersService.getAllOrders();
+    public Page<OrdersVO> getAllOrders(@RequestParam(value = "size") Integer size,
+                                       @RequestParam(value = "page") Integer page,
+                                       @RequestParam(required = false) String query) {
+
+        return ordersService.getAllOrders(page - 1, size);
+        //todo 添加查询
     }
+
+    @ApiOperation(value = "通过id查询订单信息")
+    @GetMapping("/queryOrders")
+    public OrdersVO getGoodsById(@RequestParam("id") int id) {
+        return ordersService.getOrderById(id);
+    }
+
+    @PostMapping("/updateOrders")
+    private int updateOrders(@RequestBody OrdersVO ordersVO) {
+        return ordersService.updateOrders(ordersVO);
+    }
+
+    @ApiOperation(value = "删除订单信息")
+    @GetMapping("/deleteOrders")
+    public boolean deleteOrders(@RequestParam("id") int id) {
+        try {
+            ordersService.deleteOrdersById(id);
+            return true;
+        } catch (Exception e) {
+            log.error(String.valueOf(e));
+        }
+        return false;
+    }
+
 }

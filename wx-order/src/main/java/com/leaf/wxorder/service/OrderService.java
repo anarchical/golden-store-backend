@@ -5,6 +5,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.leaf.backstagegood.entity.Goods;
 import com.leaf.backstageorder.entity.Orders;
 import com.leaf.backstageorder.entity.OrdersGoods;
+import com.leaf.backstageorder.enums.OrdersEnum;
 import com.leaf.backstageuser.entity.Address;
 import com.leaf.backstageuser.entity.User;
 import com.leaf.wxorder.repository.AddressRepository;
@@ -48,6 +49,7 @@ public class OrderService {
         orders.setPrice(jsonObject.getFloat("price"));
         orders.setAddress(address);
         orders.setUser(user);
+        orders.setStatus(OrdersEnum.UNDO.getStatus());
 
         Orders order = ordersRepository.save(orders);
 

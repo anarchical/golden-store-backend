@@ -1,5 +1,6 @@
 package com.leaf.backstageorder.entity;
 
+import com.leaf.backstageorder.enums.OrdersEnum;
 import com.leaf.backstageuser.entity.Address;
 import com.leaf.backstageuser.entity.User;
 import lombok.AllArgsConstructor;
@@ -27,6 +28,11 @@ public class Orders {
 
     private float price;
 
+    //    订单状态
+    private String status;
+    //    订单备注
+    private String remarks;
+
     @ManyToOne
     private User user;
 
@@ -38,6 +44,6 @@ public class Orders {
             updatable = false)
     private LocalDateTime createTime;
 
-    @OneToMany(mappedBy = "order")
+    @OneToMany(mappedBy = "order",cascade = CascadeType.REMOVE)
     private List<OrdersGoods> orderGoods;
 }
