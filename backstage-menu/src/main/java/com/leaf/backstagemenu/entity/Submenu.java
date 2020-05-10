@@ -20,6 +20,8 @@ public class Submenu {
 
     private String path;
 
+    private String icon;
+
     @ManyToOne
     @JsonIgnore
     private Menu menu;

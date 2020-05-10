@@ -27,6 +27,12 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
             "orders.address.userName,orders.status,orders.remarks) from Orders orders ")
     Page<OrdersVO> findAllOrderVO(Pageable pageable);
 
+    @Query("select new com.leaf.backstageorder.vo.OrdersVO(orders.id,orders.price,orders.createTime," +
+            "orders.user.openId,orders.address.cityName,orders.address.countyName,orders.address.detailInfo," +
+            "orders.address.postalCode,orders.address.provinceName,orders.address.telNumber," +
+            "orders.address.userName,orders.status,orders.remarks) from Orders orders where orders.status=:status")
+    Page<OrdersVO> findAllOrderVOByStatus(@Param("status") String status, Pageable pageable);
+
 
     @Query("select new com.leaf.backstageorder.vo.OrdersVO(orders.id,orders.price,orders.createTime," +
             "orders.user.openId,orders.address.cityName,orders.address.countyName,orders.address.detailInfo," +
@@ -36,5 +42,5 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
 
     @Modifying
     @Query("update Orders orders set orders.status=:status,orders.remarks=:remarks where orders.id=:id")
-    int updateOrderById(@Param("id") int id,@Param("status") String status,@Param("remarks") String remarks);
+    int updateOrderById(@Param("id") int id, @Param("status") String status, @Param("remarks") String remarks);
 }

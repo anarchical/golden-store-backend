@@ -47,6 +47,16 @@ public class OrdersService {
         return ordersVOList;
     }
 
+    public Page<OrdersVO> getAllOrdersByStatus(Integer page, Integer size,String status) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<OrdersVO> ordersVOList = ordersRepository.findAllOrderVOByStatus(status,pageRequest);
+
+        for (OrdersVO ordersVO : ordersVOList) {
+            ordersVO.setGoodsVOList(ordersGoodsRepository.findByOrdersId(ordersVO.getId()));
+        }
+        return ordersVOList;
+    }
+
     public OrdersVO getOrderById(int id) {
 
         OrdersVO ordersVO = ordersRepository.findOrderVOById(id);

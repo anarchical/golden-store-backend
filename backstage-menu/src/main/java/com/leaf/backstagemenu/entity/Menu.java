@@ -15,6 +15,8 @@ public class Menu {
 
     private String name;
 
+    private String icon;
+
     @OneToMany(mappedBy = "menu")
     private List<Submenu> submenuList;
 

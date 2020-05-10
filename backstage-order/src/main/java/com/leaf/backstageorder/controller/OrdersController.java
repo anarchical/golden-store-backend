@@ -1,6 +1,5 @@
 package com.leaf.backstageorder.controller;
 
-import com.alibaba.fastjson.JSONObject;
 import com.leaf.backstageorder.service.OrdersService;
 import com.leaf.backstageorder.vo.OrdersVO;
 import io.swagger.annotations.Api;
@@ -47,6 +46,14 @@ public class OrdersController {
 
         return ordersService.getAllOrders(page - 1, size);
         //todo 添加查询
+    }
+
+    @ApiOperation("获取所有订单信息根据状态")
+    @GetMapping("/allOrdersByStatus")
+    public Page<OrdersVO> getAllOrdersByStatus(@RequestParam(value = "size") Integer size,
+                                               @RequestParam(value = "page") Integer page,
+                                               @RequestParam(value = "status") String status) {
+        return ordersService.getAllOrdersByStatus(page - 1, size, status);
     }
 
     @ApiOperation(value = "通过id查询订单信息")
