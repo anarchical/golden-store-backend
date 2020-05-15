@@ -6,6 +6,7 @@ import com.leaf.backstagegood.entity.Goods;
 import com.leaf.backstageorder.entity.Orders;
 import com.leaf.backstageorder.entity.OrdersGoods;
 import com.leaf.backstageorder.enums.OrdersEnum;
+import com.leaf.backstageorder.vo.OrdersVO;
 import com.leaf.backstageuser.entity.Address;
 import com.leaf.backstageuser.entity.User;
 import com.leaf.wxorder.repository.AddressRepository;
@@ -13,6 +14,8 @@ import com.leaf.wxorder.repository.OrdersGoodsRepository;
 import com.leaf.wxorder.repository.OrdersRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -60,7 +63,7 @@ public class OrderService {
 
         for (int i = 0; i < orderGoodsJsonList.size(); i++) {
             OrdersGoods ordersGoods = new OrdersGoods();
-            Goods goods=new Goods();
+            Goods goods = new Goods();
             ordersGoods.setQuantity(orderGoodsJsonList.getJSONObject(i).getInteger("quantity"));
             goods.setId(orderGoodsJsonList.getJSONObject(i).getInteger("id"));
             ordersGoods.setGoods(goods);
@@ -69,7 +72,7 @@ public class OrderService {
 
         }
 
-        log.info("订单商品{}",ordersGoodsList.size());
+        log.info("订单商品{}", ordersGoodsList.size());
 
         ordersGoodsRepository.saveAll(ordersGoodsList);
 
@@ -92,6 +95,24 @@ public class OrderService {
         }
         log.info("地址不存在，新增后返回");
         return addressRepository.save(newAddress);
+    }
+
+    public Page<OrdersVO> getAllOrders(Integer page, Integer size, Integer id) {
+        PageRequest pageRequest = PageRequest.of(page, size);
+        Page<OrdersVO> ordersVOList = ordersRepository.findAllOrderVOByUserId(id, pageRequest);
+
+        for (OrdersVO ordersVO : ordersVOList) {
+            ordersVO.setGoodsVOList(ordersGoodsRepository.findByOrdersId(ordersVO.getId()));
+        }
+        return ordersVOList;
+    }
+
+
+    public OrdersVO getOrderById(int id) {
+
+        OrdersVO ordersVO = ordersRepository.findOrderVOById(id);
+        ordersVO.setGoodsVOList(ordersGoodsRepository.findByOrdersId(ordersVO.getId()));
+        return ordersVO;
     }
 
 }

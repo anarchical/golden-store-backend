@@ -19,7 +19,6 @@ import java.util.List;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Goods {
 
     @Id
@@ -32,16 +31,21 @@ public class Goods {
     private int stock;
 
     //    成本价
+    @Column(columnDefinition="float(10,2) default '0.00'")
     private float costPrice;
     //    批发价
+    @Column(columnDefinition="float(10,2) default '0.00'")
     private float tradePrice;
     //    建议零售价
+    @Column(columnDefinition="float(10,2) default '0.00'")
     private float price;
     //    平台利润
+    @Column(columnDefinition="float(10,2) default '0.00'")
     private float myReturn;
     //    每个批发单位数量
     private int numSpec;
     //    客户利润
+    @Column(columnDefinition="float(10,2) default '0.00'")
     private float profit;
     //    规格
     private String specification;

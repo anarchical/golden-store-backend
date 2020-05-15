@@ -58,7 +58,7 @@ public class OrdersController {
 
     @ApiOperation(value = "通过id查询订单信息")
     @GetMapping("/queryOrders")
-    public OrdersVO getGoodsById(@RequestParam("id") int id) {
+    public OrdersVO getOrdersById(@RequestParam("id") int id) {
         return ordersService.getOrderById(id);
     }
 
