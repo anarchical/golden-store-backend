@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -20,4 +21,10 @@ public interface OrdersGoodsRepository extends JpaRepository<OrdersGoods, Intege
     @Query("select new com.leaf.backstageorder.vo.OrdersGoodsVO(og.id,og.goods.id," +
             "og.quantity,og.goods.name,og.goods.price) from OrdersGoods og where og.order.id=:id")
     List<OrdersGoodsVO> findByOrdersId(@Param("id") int id);
+
+    @Query("select sum(og.goods.myReturn) from OrdersGoods og where og.order.status=:status")
+    Float getAllReturn(@Param("status") String status);
+
+    @Query("select sum(og.goods.myReturn) from OrdersGoods og where  og.order.createTime >:time and og.order.status=:status")
+    Float getAllReturnByTime(@Param("time") LocalDateTime time, @Param("status") String status);
 }

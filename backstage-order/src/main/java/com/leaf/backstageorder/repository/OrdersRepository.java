@@ -11,6 +11,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -43,4 +44,20 @@ public interface OrdersRepository extends JpaRepository<Orders, Integer> {
     @Modifying
     @Query("update Orders orders set orders.status=:status,orders.remarks=:remarks where orders.id=:id")
     int updateOrderById(@Param("id") int id, @Param("status") String status, @Param("remarks") String remarks);
+
+
+
+    @Query("select count(orders) from Orders orders where orders.status=:status")
+    Integer getAllVolume(@Param("status") String status);
+
+    @Query("select count(orders) from Orders orders where orders.status=:status and orders.createTime >:time")
+    Integer getAllVolumeByTime(@Param("status") String status, @Param("time") LocalDateTime time);
+
+
+    @Query("select sum(orders.price) from Orders orders where orders.status=:status")
+    Float getAllTrade(@Param("status") String status);
+
+    @Query("select sum(orders.price) from Orders orders where  orders.createTime >:time and orders.status=:status")
+    Float getAllTradeByTime(@Param("time") LocalDateTime time, @Param("status") String status);
+
 }
