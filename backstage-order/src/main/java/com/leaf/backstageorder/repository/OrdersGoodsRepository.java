@@ -22,9 +22,9 @@ public interface OrdersGoodsRepository extends JpaRepository<OrdersGoods, Intege
             "og.quantity,og.goods.name,og.goods.price) from OrdersGoods og where og.order.id=:id")
     List<OrdersGoodsVO> findByOrdersId(@Param("id") int id);
 
-    @Query("select sum(og.goods.myReturn) from OrdersGoods og where og.order.status=:status")
+    @Query("select sum(og.goods.myReturn*og.quantity) from OrdersGoods og where og.order.status=:status")
     Float getAllReturn(@Param("status") String status);
 
-    @Query("select sum(og.goods.myReturn) from OrdersGoods og where  og.order.createTime >:time and og.order.status=:status")
+    @Query("select sum(og.goods.myReturn*og.quantity) from OrdersGoods og where  og.order.createTime >:time and og.order.status=:status")
     Float getAllReturnByTime(@Param("time") LocalDateTime time, @Param("status") String status);
 }

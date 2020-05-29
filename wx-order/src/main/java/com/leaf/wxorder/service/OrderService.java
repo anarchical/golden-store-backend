@@ -10,6 +10,7 @@ import com.leaf.backstageorder.vo.OrdersVO;
 import com.leaf.backstageuser.entity.Address;
 import com.leaf.backstageuser.entity.User;
 import com.leaf.wxorder.repository.AddressRepository;
+import com.leaf.wxorder.repository.GoodsRepository;
 import com.leaf.wxorder.repository.OrdersGoodsRepository;
 import com.leaf.wxorder.repository.OrdersRepository;
 import lombok.extern.slf4j.Slf4j;
@@ -17,6 +18,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +30,7 @@ import java.util.List;
  */
 @Slf4j
 @Service
+@Transactional
 public class OrderService {
 
     @Autowired
@@ -36,6 +39,8 @@ public class OrderService {
     OrdersRepository ordersRepository;
     @Autowired
     OrdersGoodsRepository ordersGoodsRepository;
+    @Autowired
+    GoodsRepository goodsRepository;
 
     public void addOrder(JSONObject jsonObject) {
 
@@ -64,8 +69,15 @@ public class OrderService {
         for (int i = 0; i < orderGoodsJsonList.size(); i++) {
             OrdersGoods ordersGoods = new OrdersGoods();
             Goods goods = new Goods();
-            ordersGoods.setQuantity(orderGoodsJsonList.getJSONObject(i).getInteger("quantity"));
-            goods.setId(orderGoodsJsonList.getJSONObject(i).getInteger("id"));
+
+            int goodsId = orderGoodsJsonList.getJSONObject(i).getInteger("id");
+
+
+            int quantity = orderGoodsJsonList.getJSONObject(i).getInteger("quantity");
+            int newStock = goodsRepository.findStockById(goodsId) - quantity;
+            goodsRepository.updateStockById(newStock, goodsId);
+            ordersGoods.setQuantity(quantity);
+            goods.setId(goodsId);
             ordersGoods.setGoods(goods);
             ordersGoods.setOrder(order);
             ordersGoodsList.add(ordersGoods);

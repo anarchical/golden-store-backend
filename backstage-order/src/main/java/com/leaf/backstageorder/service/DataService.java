@@ -37,10 +37,15 @@ public class DataService {
 
 //        交易额
         Float allTrade = ordersRepository.getAllTrade("已完成");
+        allTrade=allTrade==null?0:allTrade;
         Float todayTrade = ordersRepository.getAllTradeByTime(yesterday, "已完成");
+        todayTrade=todayTrade==null?0:todayTrade;
+
 //        收益
         Float allReturn = ordersGoodsRepository.getAllReturn("已完成");
+        allReturn=allReturn==null?0:allReturn;
         Float todayReturn = ordersGoodsRepository.getAllReturnByTime(yesterday, "已完成");
+        todayReturn=todayReturn==null?0:todayReturn;
 
         Map<String, Object> map = new HashMap();
         map.put("volume", volume);
